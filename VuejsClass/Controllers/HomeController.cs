@@ -31,15 +31,17 @@ namespace VuejsClass.Controllers
             repo.Update(person);
         }
         [HttpPost]
-        public void delete(int id)
+        public void Delete(int id)
         {
             var repo = new PeopleRepository(Properties.Settings.Default.ConStr);
             repo.Delete(id);
         }
+
+
         public ActionResult Get()
         {
             var repo = new PeopleRepository(Properties.Settings.Default.ConStr);
-            return Json (repo.GetAll(), JsonRequestBehavior.AllowGet);
+            return Json(repo.GetAll(), JsonRequestBehavior.AllowGet);
         }
 
 

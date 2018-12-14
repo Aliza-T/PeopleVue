@@ -3,15 +3,20 @@
         <div class="col-md-8 col-md-offset-2">
             <button class="btn btn-primary" v-on:click="newClick">New Person</button>
             <button class="btn btn-success" v-on:click="sortClick">Sort</button>
+            @*// <button class="btn btn-danger" v-on:click="deleteAllClick">Delete Checked</button>*@
             <table class="table table-bordered">
                 <tr>
+                    <th>Delete</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Age</th>
                     <th>Actions</th>
                 </tr>
                 <template v-for="person in people">
-                    <tr>
+                    <tr :id="person.Id">
+                        <td>
+                            <input type="checkbox" v-model="selected" :id="person.Id" :value="person" />
+                        </td>
                         <td>{{person.FirstName}}</td>
                         <td>{{person.LastName}}</td>
                         <td>{{person.Age}}</td>
@@ -23,7 +28,7 @@
                 </template>
 
             </table>
-
+            <span>Checked names: {{ selected }}</span>
         </div>
     </div>
     <div class="modal fade" tabindex="-1" role="dialog">
@@ -55,8 +60,8 @@
 </div>
 
 @section scripts{
-    
-<script src="~/Scripts/vue.js"></script>
-<script src="~/Scripts/People.js"></script>
-    
-    }
+
+    <script src="~/Scripts/vue.js"></script>
+    <script src="~/Scripts/People.js"></script>
+
+}

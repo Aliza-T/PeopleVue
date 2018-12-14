@@ -6,8 +6,6 @@
       <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Age" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="People_People" Member="Person1" ThisKey="Id" OtherKey="Id" Type="Person" Cardinality="One" />
-      <Association Name="People_People" Member="People1" ThisKey="Id" OtherKey="Id" Type="Person" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -88,10 +88,6 @@ namespace VuejsClass.Data
 		
 		private int _Age;
 		
-		private EntityRef<Person> _Person1;
-		
-		private EntityRef<Person> _People1;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -108,8 +104,6 @@ namespace VuejsClass.Data
 		
 		public Person()
 		{
-			this._Person1 = default(EntityRef<Person>);
-			this._People1 = default(EntityRef<Person>);
 			OnCreated();
 		}
 		
@@ -124,10 +118,6 @@ namespace VuejsClass.Data
 			{
 				if ((this._Id != value))
 				{
-					if (this._People1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnIdChanging(value);
 					this.SendPropertyChanging();
 					this._Id = value;
@@ -193,69 +183,6 @@ namespace VuejsClass.Data
 					this._Age = value;
 					this.SendPropertyChanged("Age");
 					this.OnAgeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="People_People", Storage="_Person1", ThisKey="Id", OtherKey="Id", IsUnique=true, IsForeignKey=false)]
-		public Person Person1
-		{
-			get
-			{
-				return this._Person1.Entity;
-			}
-			set
-			{
-				Person previousValue = this._Person1.Entity;
-				if (((previousValue != value) 
-							|| (this._Person1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Person1.Entity = null;
-						previousValue.People1 = null;
-					}
-					this._Person1.Entity = value;
-					if ((value != null))
-					{
-						value.People1 = this;
-					}
-					this.SendPropertyChanged("Person1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="People_People", Storage="_People1", ThisKey="Id", OtherKey="Id", IsForeignKey=true)]
-		public Person People1
-		{
-			get
-			{
-				return this._People1.Entity;
-			}
-			set
-			{
-				Person previousValue = this._People1.Entity;
-				if (((previousValue != value) 
-							|| (this._People1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._People1.Entity = null;
-						previousValue.Person1 = null;
-					}
-					this._People1.Entity = value;
-					if ((value != null))
-					{
-						value.Person1 = this;
-						this._Id = value.Id;
-					}
-					else
-					{
-						this._Id = default(int);
-					}
-					this.SendPropertyChanged("People1");
 				}
 			}
 		}
