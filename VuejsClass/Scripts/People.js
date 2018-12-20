@@ -4,21 +4,21 @@
     '#app',
     mounted: function () {
         this.loadPeople();
+
     },
     data: {
-       selected: [],
+        selected: [],
         people: [],
         modalPerson: {
-           
+
             FirstName: '',
             LastName: '',
             Age: ''
-     
+
         },
         isEditMode: false,
         sortAsc: 1,
         isNotSorted: true
-     
     },
     methods: {
         loadPeople: function (cb) {
@@ -28,6 +28,7 @@
                     cb();
                 }
             });
+
         },
         updateClick: function () {
             $.post('/home/edit', this.modalPerson, () => {
@@ -73,18 +74,25 @@
         //}
         sortClick: function () {
             if (this.isNotSorted) {
-                this.people.sort((a, b) => (a.Age - b.Age));
+                this.people.sort((a, b) => a.Age - b.Age);
                 this.isNotSorted = false;
             }
             else {
-                this.people.sort((a, b) => (-a.Age - -b.Age));
+                this.people.sort((a, b) => -a.Age - -b.Age);
                 this.isNotSorted = true;
             }
-        }
-      
-        //deleteAllClick: function () {
-        //    //delete all that are in the selected array
-        //}
-    }
+        },
+        enable: function () {
 
+            $("#deleteChecked").removeAttr("disabled");
+        },
+        deleteAllClick: function () {
+            $.post('/home/deleteAll', { people: this.selected }, () => {
+                this.loadPeople();
+            });
+        }
+    }
 });
+
+
+

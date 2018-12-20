@@ -3,7 +3,7 @@
         <div class="col-md-8 col-md-offset-2">
             <button class="btn btn-primary" v-on:click="newClick">New Person</button>
             <button class="btn btn-success" v-on:click="sortClick">Sort</button>
-            @*// <button class="btn btn-danger" v-on:click="deleteAllClick">Delete Checked</button>*@
+            <button class="btn btn-danger"id="deleteChecked" v-on:click="deleteAllClick" disabled>Delete Checked</button>
             <table class="table table-bordered">
                 <tr>
                     <th>Delete</th>
@@ -13,22 +13,23 @@
                     <th>Actions</th>
                 </tr>
                 <template v-for="person in people">
-                    <tr :id="person.Id">
-                        <td>
-                            <input type="checkbox" v-model="selected" :id="person.Id" :value="person" />
-                        </td>
-                        <td>{{person.FirstName}}</td>
-                        <td>{{person.LastName}}</td>
-                        <td>{{person.Age}}</td>
-                        <td>
-                            <button class="btn btn-warning" v-on:click="editClick(person)">Edit</button>
-                            <button class="btn btn-danger" v-on:click="deleteClick(person.Id)">Delete</button>
+                    <tr :id="person.Id" :class="{danger:selected.includes(person)}">
+                          <td>
+                                <input type="checkbox" v-model="selected" :id="person.Id" v-on:click="enable":value="person" />
+                            </td>
+                            <td>{{person.FirstName}}</td>
+                            <td>{{person.LastName}}</td>
+                            <td>{{person.Age}}</td>
+                            <td>
+                     
+                        <button class="btn btn-warning" v-on:click="editClick(person)">Edit</button>
+                        <button class="btn btn-danger" v-on:click="deleteClick(person.Id)">Delete</button>
                         </td>
                     </tr>
                 </template>
 
             </table>
-            <span>Checked names: {{ selected }}</span>
+            @*<span>Checked names: {{ selected }}</span>*@
         </div>
     </div>
     <div class="modal fade" tabindex="-1" role="dialog">

@@ -36,8 +36,14 @@ namespace VuejsClass.Controllers
             var repo = new PeopleRepository(Properties.Settings.Default.ConStr);
             repo.Delete(id);
         }
-
-
+        [HttpPost]
+        public void DeleteAll(IEnumerable <Person> people)
+        {
+            foreach(Person p in people)
+            {
+                Delete(p.Id);
+            }
+        }
         public ActionResult Get()
         {
             var repo = new PeopleRepository(Properties.Settings.Default.ConStr);
